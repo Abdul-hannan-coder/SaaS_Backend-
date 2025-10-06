@@ -1,0 +1,36 @@
+[project]
+name = "data-migration-project"
+version = "0.1.0"
+description = "A comprehensive data migration tool with MySQL to ClickHouse support"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.116.1",
+    "python-dotenv>=1.1.1",
+    "uvicorn>=0.35.0",
+    "sqlmodel>=0.0.14",
+    "pymysql>=1.1.0",
+    "clickhouse-connect>=0.7.0",
+    "clickhouse-driver>=0.2.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.1.0",
+    "cryptography>=45.0.5",
+    "sentry-sdk[fastapi]>=2.34.0",
+    "tenacity>=8.2.0",
+    "aiosqlite>=0.21.0",
+    "jinja2>=3.1.0",
+    "python-multipart>=0.0.20",
+    "passlib[bcrypt]>=1.7.4",
+    "python-jose[cryptography]>=3.3.0",
+    "requests>=2.32.5",
+    "yt-dlp>=2023.12.30",
+    "google-genai>=1.31.0",
+    "openai-agents[litellm]>=0.2.9",
+    "google-api-python-client>=2.179.0",
+    "google-auth-httplib2>=0.2.0",
+    "google-auth-oauthlib>=1.2.2",
+    "youtube-transcript-api>=1.2.2",
+    "authlib>=1.3.0",
+    "httpx>=0.25.0",
+]
+

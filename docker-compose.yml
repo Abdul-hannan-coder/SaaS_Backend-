@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DATABASE_URL=mysql+pymysql://uzair:uzairyasin123@138.2.132.46:3307/my_database
+      - PORT=8000
+      - GEMINI_API_KEY=AIzaSyBf-7p-DiTq3s1rLwwnC_jaXVWEK8naVjE

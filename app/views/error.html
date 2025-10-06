@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Authentication Error</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+          transform: translateX(-5px);
+        }
+        20%,
+        40%,
+        60%,
+        80% {
+          transform: translateX(5px);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
+      }
+      .animate-shake {
+        animation: shake 0.8s ease-in-out;
+      }
+      .animate-pulse-slow {
+        animation: pulse 2s infinite;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-br from-red-50 via-pink-50 to-orange-50 min-h-screen flex items-center justify-center p-4"
+  >
+    <div class="max-w-md w-full">
+      <!-- Error Card -->
+      <div class="bg-white rounded-2xl shadow-2xl p-8 animate-fade-in-up">
+        <!-- Error Icon -->
+        <div class="flex justify-center mb-6">
+          <div
+            class="w-20 h-20 bg-gradient-to-r from-red-400 to-pink-500 rounded-full flex items-center justify-center animate-pulse-slow"
+          >
+            <i class="fas fa-exclamation-triangle text-white text-3xl"></i>
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <div class="text-center mb-6">
+          <h1 class="text-2xl font-bold text-gray-800 mb-2">
+            Authentication Failed
+          </h1>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            We encountered an issue while connecting your Google account. Please
+            try again or contact support if the problem persists.
+          </p>
+
+          <!-- Dynamic Error Details -->
+          <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
+            <div class="flex items-start space-x-3">
+              <i class="fas fa-info-circle text-red-500 mt-1"></i>
+              <div class="text-left">
+                <h3 class="font-semibold text-red-800 text-sm mb-1">
+                  Error Details:
+                </h3>
+                <p class="text-red-700 text-sm" id="error-message">
+                  {% if error %} {{ error }} {% else %} Unknown error occurred
+                  {% endif %}
+                </p>
+                {% if error_description %}
+                <p class="text-red-600 text-xs mt-1">{{ error_description }}</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Common Solutions -->
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+          <h3
+            class="font-semibold text-blue-800 text-sm mb-3 flex items-center"
+          >
+            <i class="fas fa-lightbulb mr-2"></i>
+            Try these solutions:
+          </h3>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-start space-x-2">
+              <i class="fas fa-check-circle text-blue-500 mt-0.5"></i>
+              <span class="text-blue-700">Check your internet connection</span>
+            </div>
+            <div class="flex items-start space-x-2">
+              <i class="fas fa-check-circle text-blue-500 mt-0.5"></i>
+              <span class="text-blue-700"
+                >Ensure you're using a supported browser</span
+              >
+            </div>
+            <div class="flex items-start space-x-2">
+              <i class="fas fa-check-circle text-blue-500 mt-0.5"></i>
+              <span class="text-blue-700">Clear browser cache and cookies</span>
+            </div>
+            <div class="flex items-start space-x-2">
+              <i class="fas fa-check-circle text-blue-500 mt-0.5"></i>
+              <span class="text-blue-700">Try again in a few minutes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="space-y-3">
+          <button
+            onclick="retryAuthentication()"
+            class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
+          >
+            <i class="fas fa-redo mr-2"></i>
+            Try Again
+          </button>
+          <button
+            onclick="window.close()"
+            class="w-full bg-gray-100 text-gray-700 font-semibold py-3 px-6 rounded-xl hover:bg-gray-200 transition-all duration-200"
+          >
+            <i class="fas fa-times mr-2"></i>
+            Close Window
+          </button>
+          <button
+            onclick="contactSupport()"
+            class="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-purple-600 hover:to-pink-700 transition-all duration-200"
+          >
+            <i class="fas fa-headset mr-2"></i>
+            Contact Support
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="text-center mt-6">
+        <p class="text-gray-500 text-sm">
+          <i class="fas fa-shield-alt mr-1"></i>
+          Your security is our priority
+        </p>
+      </div>
+    </div>
+
+    <!-- Error Animation -->
+    <div id="error-particles" class="fixed inset-0 pointer-events-none"></div>
+
+    <script>
+      // Error particles animation
+      function createErrorParticles() {
+        const colors = ["#EF4444", "#F87171", "#FCA5A5", "#FECACA"];
+        const particlesContainer = document.getElementById("error-particles");
+
+        for (let i = 0; i < 30; i++) {
+          setTimeout(() => {
+            const particle = document.createElement("div");
+            particle.style.position = "absolute";
+            particle.style.left = Math.random() * 100 + "vw";
+            particle.style.top = Math.random() * 100 + "vh";
+            particle.style.width = "4px";
+            particle.style.height = "4px";
+            particle.style.backgroundColor =
+              colors[Math.floor(Math.random() * colors.length)];
+            particle.style.borderRadius = "50%";
+            particle.style.opacity = "0.6";
+            particle.style.animation = `float ${
+              Math.random() * 4 + 3
+            }s ease-in-out infinite`;
+            particlesContainer.appendChild(particle);
+          }, i * 200);
+        }
+      }
+
+      // Add float animation
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes float {
+                0%, 100% { 
+                    transform: translateY(0px) rotate(0deg);
+                    opacity: 0.6;
+                }
+                50% { 
+                    transform: translateY(-20px) rotate(180deg);
+                    opacity: 0.3;
+                }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // Retry authentication function
+      function retryAuthentication() {
+        // Add shake animation to the card
+        const card = document.querySelector(".bg-white");
+        card.classList.add("animate-shake");
+
+        setTimeout(() => {
+          card.classList.remove("animate-shake");
+          // Redirect to the authentication URL
+          window.location.href = "/youtube/create-token";
+        }, 800);
+      }
+
+      // Contact support function
+      function contactSupport() {
+        const email = "support@yourapp.com";
+        const subject = "OAuth Authentication Error";
+        const body = `I encountered an error during Google OAuth authentication.\n\nError: ${
+          document.getElementById("error-message").textContent
+        }\n\nPlease help me resolve this issue.`;
+
+        window.open(
+          `mailto:${email}?subject=${encodeURIComponent(
+            subject
+          )}&body=${encodeURIComponent(body)}`
+        );
+      }
+
+      // Start particles after page load
+      window.addEventListener("load", () => {
+        setTimeout(createErrorParticles, 500);
+      });
+
+      // Auto-close after 30 seconds (optional)
+      setTimeout(() => {
+        const autoCloseBtn = document.createElement("div");
+        autoCloseBtn.className =
+          "fixed bottom-4 right-4 bg-yellow-500 text-white px-4 py-2 rounded-lg shadow-lg cursor-pointer hover:bg-yellow-600 transition-colors";
+        autoCloseBtn.innerHTML =
+          '<i class="fas fa-clock mr-2"></i>Auto-close in 10s';
+        document.body.appendChild(autoCloseBtn);
+
+        let countdown = 10;
+        const interval = setInterval(() => {
+          countdown--;
+          autoCloseBtn.innerHTML = `<i class="fas fa-clock mr-2"></i>Auto-close in ${countdown}s`;
+
+          if (countdown <= 0) {
+            clearInterval(interval);
+            window.close();
+          }
+        }, 1000);
+      }, 20000);
+    </script>
+  </body>
+</html>

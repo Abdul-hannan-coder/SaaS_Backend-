@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Connect LinkedIn</title>
+</head>
+<body>
+  <h2>Connect LinkedIn</h2>
+  <button id="connectBtn">Connect</button>
+
+  <script>
+    async function connect() {
+      // Step 1: Ask your backend for a session token
+      const res = await fetch("http://localhost:8000/create-session?user_id=user-123", {
+        method: "POST"
+      });
+      const data = await res.json();
+      const sessionToken = data.session_token;
+
+      // Step 2: Redirect user to Nango Connect UI
+      const url = `https://api.nango.dev/connect/${sessionToken}`;
+      window.location.href = url;
+    }
+
+    document.getElementById("connectBtn").addEventListener("click", connect);
+  </script>
+</body>
+</html>

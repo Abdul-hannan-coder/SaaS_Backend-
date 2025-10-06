@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Google OAuth</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        text-align: center;
+      }
+      .button {
+        background-color: #4285f4;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin: 10px;
+      }
+      .button:hover {
+        background-color: #3367d6;
+      }
+      .status {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 4px;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔐 Test Google OAuth</h1>
+
+    <div class="status">
+      <h3>Configuration Status</h3>
+      <p id="status">Loading...</p>
+    </div>
+
+    <div>
+      <a href="http://localhost:8000/auth/google/login" class="button">
+        🚀 Continue with Google
+      </a>
+    </div>
+
+    <div>
+      <a
+        href="http://localhost:8000/docs"
+        class="button"
+        style="background-color: #34a853"
+      >
+        📚 Open API Docs
+      </a>
+    </div>
+
+    <script>
+      // Check OAuth configuration status
+      fetch("http://localhost:8000/auth/google/status")
+        .then((response) => response.json())
+        .then((data) => {
+          const statusEl = document.getElementById("status");
+          if (data.google_oauth_configured) {
+            statusEl.innerHTML = `
+                        ✅ <strong>Google OAuth Configured</strong><br>
+                        Redirect URI: ${data.redirect_uri}<br>
+                        Login URL: ${data.login_url}
+                    `;
+            statusEl.style.color = "green";
+          } else {
+            statusEl.innerHTML = "❌ Google OAuth not configured";
+            statusEl.style.color = "red";
+          }
+        })
+        .catch((error) => {
+          document.getElementById("status").innerHTML =
+            "❌ Error checking status: " + error.message;
+        });
+    </script>
+  </body>
+</html>
+

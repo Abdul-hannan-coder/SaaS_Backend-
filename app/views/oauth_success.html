@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Authentication Successful</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
+      }
+      .animate-pulse-slow {
+        animation: pulse 2s infinite;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 min-h-screen flex items-center justify-center p-4"
+  >
+    <div class="max-w-md w-full">
+      <!-- Success Card -->
+      <div class="bg-white rounded-2xl shadow-2xl p-8 animate-fade-in-up">
+        <!-- Success Icon -->
+        <div class="flex justify-center mb-6">
+          <div
+            class="w-20 h-20 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center animate-pulse-slow"
+          >
+            <i class="fas fa-check text-white text-3xl"></i>
+          </div>
+        </div>
+
+        <!-- Success Message -->
+        <div class="text-center mb-6">
+          <h1 class="text-2xl font-bold text-gray-800 mb-2">
+            OAuth Successful!
+          </h1>
+          <p class="text-gray-600 leading-relaxed">Please close this window.</p>
+        </div>
+
+        <!-- Service Info -->
+        <div
+          class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 mb-6"
+        >
+          <div class="flex items-center justify-center space-x-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center"
+            >
+              <i class="fab fa-youtube text-white text-lg"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800">YouTube Services</h3>
+              <p class="text-sm text-gray-600">API Integration</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features List -->
+        <div class="space-y-3 mb-6">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-check text-green-600 text-xs"></i>
+            </div>
+            <span class="text-gray-700">YouTube API integration</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-check text-green-600 text-xs"></i>
+            </div>
+            <span class="text-gray-700">Automatic token refresh</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="text-center mt-6">
+        <p class="text-gray-500 text-sm">
+          <i class="fas fa-shield-alt mr-1"></i>
+          Your data is secure and encrypted
+        </p>
+      </div>
+    </div>
+
+    <!-- Confetti Animation -->
+    <div
+      id="confetti-container"
+      class="fixed inset-0 pointer-events-none"
+    ></div>
+
+    <script>
+      // Confetti animation
+      function createConfetti() {
+        const colors = ["#10B981", "#059669", "#34D399", "#6EE7B7"];
+        const confettiContainer = document.getElementById("confetti-container");
+
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => {
+            const confetti = document.createElement("div");
+            confetti.style.position = "absolute";
+            confetti.style.left = Math.random() * 100 + "vw";
+            confetti.style.top = "-10px";
+            confetti.style.width = "8px";
+            confetti.style.height = "8px";
+            confetti.style.backgroundColor =
+              colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.borderRadius = "50%";
+            confetti.style.animation = `fall ${
+              Math.random() * 3 + 2
+            }s linear forwards`;
+            confettiContainer.appendChild(confetti);
+
+            setTimeout(() => {
+              confetti.remove();
+            }, 5000);
+          }, i * 100);
+        }
+      }
+
+      // Add fall animation
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // Start confetti after page load
+      window.addEventListener("load", () => {
+        setTimeout(createConfetti, 500);
+      });
+    </script>
+  </body>
+</html>
