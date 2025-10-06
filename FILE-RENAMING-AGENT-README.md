@@ -9,11 +9,13 @@ Transform chaotic file/folder names into clean, consistent, and professional str
 ## ✨ Features
 
 - **Smart Analysis**: Automatically detects project type and current naming patterns
+- **Descriptive Naming**: Transforms generic names into self-documenting, purpose-driven names
 - **Multi-Language Support**: Applies appropriate conventions for Python, JavaScript, TypeScript, etc.
 - **Safe Operations**: Generates backup and rollback commands
 - **Batch Processing**: Handles multiple files/folders efficiently
 - **Conflict Detection**: Identifies potential naming conflicts before execution
 - **Best Practices**: Follows industry standards for naming conventions
+- **Self-Documenting**: Creates names that explain functionality without needing comments
 
 ## 🚀 Quick Start
 
@@ -30,13 +32,13 @@ Transform chaotic file/folder names into clean, consistent, and professional str
 Simply describe your messy file structure to the agent:
 
 ```
-"My folders are named 'My Project Files', 'Utils & Helpers', 'API_STUFF' and I have files like 'myComponent.JS', 'config file.json', 'Test File 1.py'"
+"My folders are named 'My Project Files', 'Utils & Helpers', 'API_STUFF' and I have files like 'myComponent.JS', 'config file.json', 'handler.py'"
 ```
 
 The agent will provide:
-- Analysis of current issues
-- Recommended naming conventions
-- Safe rename commands
+- Analysis of current issues and vague naming
+- Descriptive naming recommendations based on file content/purpose
+- Safe rename commands with clear functionality names
 - Rollback instructions
 
 ## 📋 Naming Conventions Supported
@@ -54,12 +56,37 @@ The agent will provide:
 
 | File Type | Convention | Example |
 |-----------|------------|---------|
-| Python | snake_case.py | `my_module.py` |
-| JavaScript | camelCase.js | `myScript.js` |
-| TypeScript | camelCase.ts | `myModule.ts` |
-| React Components | PascalCase.tsx | `MyComponent.tsx` |
-| Config Files | kebab-case.ext | `app-config.json` |
-| Test Files | test_name.test.ext | `component.test.js` |
+| Python | snake_case.py | `user_authentication_service.py` |
+| JavaScript | camelCase.js | `emailValidationUtils.js` |
+| TypeScript | camelCase.ts | `paymentProcessingService.ts` |
+| React Components | PascalCase.tsx | `UserProfileCard.tsx` |
+| Config Files | kebab-case.ext | `database-connection-config.json` |
+| Test Files | descriptive.test.ext | `userAuthentication.test.js` |
+
+## 🎯 Descriptive Naming Philosophy
+
+### ❌ Avoid Generic Names
+```
+utils/           → data-processing-utilities/
+helpers/         → form-validation-helpers/
+components/      → user-interface-components/
+file.js         → userRegistrationService.js
+handler.py      → videoUploadHandler.py
+config.json     → api-endpoint-config.json
+```
+
+### ✅ Use Purpose-Driven Names
+```
+user-authentication-system/     # Handles login/signup
+video-processing-engine/        # Processes uploaded videos
+email-notification-service/     # Sends automated emails
+payment-gateway-integration/    # Handles payment processing
+
+calculateMonthlyRevenue.js      # Calculates monthly revenue
+validateEmailAddress.py         # Validates email format
+generatePdfReport.js           # Generates PDF reports
+processVideoUpload.py          # Handles video uploads
+```
 
 ## 🛡️ Safety Features
 
@@ -95,14 +122,14 @@ My Python Project/
 
 **Agent Response:**
 ```bash
-# Rename folders
-mv "My Python Project" "my_python_project"
-mv "Utils & Helpers" "utils_helpers"
-mv "API Calls" "api_calls"
+# Rename folders with descriptive purposes
+mv "My Python Project" "video_processing_system"
+mv "Utils & Helpers" "data_validation_utilities"
+mv "API Calls" "external_api_services"
 
-# Rename files
-mv "myModule.PY" "my_module.py"
-mv "Config File.json" "config.json"
+# Rename files with clear functionality
+mv "myModule.PY" "video_compression_handler.py"
+mv "Config File.json" "database_connection_config.json"
 ```
 
 ### Example 2: React Project Cleanup
@@ -118,14 +145,14 @@ my react app/
 
 **Agent Response:**
 ```bash
-# Rename folders
-mv "my react app" "my-react-app"
-mv "components & stuff" "components"
+# Rename folders with descriptive purposes
+mv "my react app" "user-management-dashboard"
+mv "components & stuff" "user-interface-components"
 
-# Rename files
-mv "myComponent.JS" "MyComponent.js"
-mv "another component.tsx" "AnotherComponent.tsx"
-mv "app config.json" "app-config.json"
+# Rename files with clear functionality
+mv "myComponent.JS" "UserProfileCard.js"
+mv "another component.tsx" "EmailNotificationPanel.tsx"
+mv "app config.json" "api-endpoint-configuration.json"
 ```
 
 ## 🔧 Advanced Features
@@ -197,11 +224,15 @@ mv "My File Name.txt" "my-file-name.txt"
 
 - [ ] **No spaces** in file/folder names
 - [ ] **Consistent case** throughout project
-- [ ] **Descriptive names** that indicate purpose
+- [ ] **Descriptive names** that clearly explain functionality
+- [ ] **Self-documenting** - purpose obvious from name alone
+- [ ] **Avoid generic terms** like "utils", "helpers", "stuff"
+- [ ] **Include action/purpose** in names when applicable
 - [ ] **Proper extensions** for all files
 - [ ] **Language-specific** conventions followed
 - [ ] **No special characters** except `-` and `_`
-- [ ] **Reasonable length** (not too long/short)
+- [ ] **Reasonable length** (descriptive but not excessive)
+- [ ] **Context-aware** naming with domain relevance
 - [ ] **Version control** friendly names
 
 ## 🔄 Workflow Integration
